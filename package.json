@@ -1,0 +1,27 @@
+{
+    "name": "file-converter",
+    "version": "1.0.0",
+    "description": "A beautiful universal file converter application",
+    "main": "main.py",
+    "scripts": {
+        "dev": "python main.py",
+        "start": "python main.py"
+    },
+    "keywords": [
+        "converter",
+        "file",
+        "pdf",
+        "docx",
+        "image",
+        "conversion"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+        "flask": "^2.0.0",
+        "python-docx": "^0.8.11",
+        "PyPDF2": "^1.26.0",
+        "Pillow": "^9.0.0",
+        "python-pptx": "^0.6.21"
+    }
+}

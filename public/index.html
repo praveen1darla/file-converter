@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal File Converter</title>
+    <link rel="stylesheet" href="../src/styles/background.css">
+    <link rel="stylesheet" href="../src/styles/animations.css">
+    <link rel="stylesheet" href="../src/styles/main.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="background-container">
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="gradient-blob blob-3"></div>
+        <div class="gradient-blob blob-4"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="title">✨ File Converter</h1>
+                <p class="subtitle">Convert any file format to any format instantly</p>
+                <button class="btn-formats" id="showFormatsBtn" onclick="document.getElementById('formatsModal').style.display='flex'">
+                    📋 Supported Formats
+                </button>
+            </header>
+
+            <!-- Main Converter Card -->
+            <div class="converter-card">
+                <!-- File Upload Section -->
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h2>Drop your file here</h2>
+                        <p>or click to select</p>
+                        <input type="file" id="fileInput" class="file-input" hidden>
+                    </div>
+                    <div id="filePreview" class="file-preview" style="display: none;">
+                        <p id="fileName" class="file-name"></p>
+                        <button class="btn-remove" id="removeFile">Change File</button>
+                    </div>
+                </div>
+
+                <!-- Format Selection -->
+                <div class="format-section">
+                    <div class="format-group">
+                        <label for="fromFormat">From Format:</label>
+                        <select id="fromFormat" class="format-select">
+                            <option value="">Auto-detect</option>
+                            <option value="pdf">PDF</option>
+                            <option value="docx">Word (DOCX)</option>
+                            <option value="doc">Word (DOC)</option>
+                            <option value="txt">Text (TXT)</option>
+                            <option value="html">HTML</option>
+                            <option value="png">PNG Image</option>
+                            <option value="jpg">JPG Image</option>
+                            <option value="webp">WEBP Image</option>
+                            <option value="xlsx">Excel (XLSX)</option>
+                            <option value="csv">CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="pptx">PowerPoint (PPTX)</option>
+                        </select>
+                    </div>
+
+                    <div class="arrow-divider">
+                        <span>→</span>
+                    </div>
+
+                    <div class="format-group">
+                        <label for="toFormat">To Format:</label>
+                        <select id="toFormat" class="format-select" required>
+                            <option value="">Select output format</option>
+                            <option value="pdf">PDF</option>
+                            <option value="docx">Word (DOCX)</option>
+                            <option value="doc">Word (DOC)</option>
+                            <option value="txt">Text (TXT)</option>
+                            <option value="html">HTML</option>
+                            <option value="png">PNG Image</option>
+                            <option value="jpg">JPG Image</option>
+                            <option value="webp">WEBP Image</option>
+                            <option value="xlsx">Excel (XLSX)</option>
+                            <option value="csv">CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="pptx">PowerPoint (PPTX)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Convert Button -->
+                <button id="convertBtn" class="btn-convert" disabled>
+                    <span class="btn-text">Convert File</span>
+                    <span class="btn-loader" style="display: none;"></span>
+                </button>
+
+                <!-- Progress Bar -->
+                <div id="progressContainer" class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText" class="progress-text">Converting... 0%</p>
+                </div>
+
+                <!-- Status Messages -->
+                <div id="statusMessage" class="status-message" style="display: none;"></div>
+            </div>
+
+            <!-- Recent Conversions -->
+            <div class="recent-conversions">
+                <h3>Recent Conversions</h3>
+                <div id="recentList" class="recent-list">
+                    <p class="empty-state">No conversions yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supported Formats Modal -->
+    <div class="modal-overlay" id="formatsModal" style="display: none;" onclick="if(event.target===this)this.style.display='none'">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Supported Conversions</h2>
+                <button class="modal-close" onclick="document.getElementById('formatsModal').style.display='none'">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">✅ = Supported &nbsp;&nbsp; ❌ = Not Supported &nbsp;&nbsp; <strong>34 conversions available</strong></p>
+
+                <!-- TXT Section -->
+                <div class="format-table-section">
+                    <h3>📄 Text Files (.TXT)</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>TXT</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>TXT</td><td>DOCX</td><td class="status-yes">✅</td></tr>
+                            <tr><td>TXT</td><td>DOC</td><td class="status-yes">✅</td></tr>
+                            <tr><td>TXT</td><td>HTML</td><td class="status-yes">✅</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DOCX/DOC Section -->
+                <div class="format-table-section">
+                    <h3>📕 Word Documents (.DOCX / .DOC)</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>DOCX</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>DOCX</td><td>TXT</td><td class="status-yes">✅</td></tr>
+                            <tr><td>DOCX</td><td>DOC</td><td class="status-yes">✅</td></tr>
+                            <tr><td>DOC</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>DOC</td><td>DOCX</td><td class="status-yes">✅</td></tr>
+                            <tr><td>DOC</td><td>TXT</td><td class="status-yes">✅</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PDF Section -->
+                <div class="format-table-section">
+                    <h3>📕 PDF Files (.PDF)</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>PDF</td><td>DOCX</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PDF</td><td>DOC</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PDF</td><td>TXT</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PDF</td><td>PNG</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PDF</td><td>JPG</td><td class="status-yes">✅</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Image Section -->
+                <div class="format-table-section">
+                    <h3>🖼️ Image Files (.PNG / .JPG / .JPEG)</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>PNG</td><td>JPG</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PNG</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PNG</td><td>WEBP</td><td class="status-yes">✅</td></tr>
+                            <tr><td>JPG</td><td>PNG</td><td class="status-yes">✅</td></tr>
+                            <tr><td>JPG</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>JPG</td><td>WEBP</td><td class="status-yes">✅</td></tr>
+                            <tr><td>JPEG</td><td>PNG</td><td class="status-yes">✅</td></tr>
+                            <tr><td>JPEG</td><td>JPG</td><td class="status-yes">✅</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Spreadsheet Section -->
+                <div class="format-table-section">
+                    <h3>📊 Spreadsheets (.XLSX / .CSV)</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>XLSX</td><td>CSV</td><td class="status-yes">✅</td></tr>
+                            <tr><td>XLSX</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>XLSX</td><td>TXT</td><td class="status-yes">✅</td></tr>
+                            <tr><td>CSV</td><td>XLSX</td><td class="status-yes">✅</td></tr>
+                            <tr><td>CSV</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>CSV</td><td>TXT</td><td class="status-yes">✅</td></tr>
+                            <tr><td>CSV</td><td>JSON</td><td class="status-yes">✅</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PPTX Section -->
+                <div class="format-table-section">
+                    <h3>🎬 Presentations (.PPTX)</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>PPTX</td><td>PDF</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PPTX</td><td>PNG</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PPTX</td><td>JPG</td><td class="status-yes">✅</td></tr>
+                            <tr><td>PPTX</td><td>TXT</td><td class="status-yes">✅</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Not Supported Section -->
+                <div class="format-table-section not-supported">
+                    <h3>🚫 Not Supported</h3>
+                    <table class="format-table">
+                        <thead><tr><th>From</th><th>To</th><th>Reason</th></tr></thead>
+                        <tbody>
+                            <tr><td>PDF</td><td>PPTX</td><td class="status-no">Complex layout</td></tr>
+                            <tr><td>PDF</td><td>XLSX</td><td class="status-no">No tabular data</td></tr>
+                            <tr><td>DOCX</td><td>XLSX</td><td class="status-no">Incompatible types</td></tr>
+                            <tr><td>DOCX</td><td>PPTX</td><td class="status-no">Complex conversion</td></tr>
+                            <tr><td>Image</td><td>TXT</td><td class="status-no">Needs OCR</td></tr>
+                            <tr><td>Image</td><td>DOCX</td><td class="status-no">Not a document</td></tr>
+                            <tr><td>XLSX</td><td>DOCX</td><td class="status-no">Incompatible types</td></tr>
+                            <tr><td>Video</td><td>Audio</td><td class="status-no">Needs ffmpeg</td></tr>
+                            <tr><td>GIF</td><td>WEBP</td><td class="status-no">Animation needed</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-summary">
+                    <span class="summary-badge green">✅ 34 Supported</span>
+                    <span class="summary-badge red">🚫 Not Supported: Incompatible formats</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/components/converter.js"></script>
+</body>
+
+</html>

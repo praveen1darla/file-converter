@@ -1,0 +1,23 @@
+[Unit]
+Description=File Converter Web Application
+After=network.target
+
+[Service]
+Type=notify
+User=praveen
+WorkingDirectory=/home/praveen/PDF_app
+Environment="PATH=/home/praveen/PDF_app/venv/bin"
+Environment="FLASK_ENV=production"
+ExecStart=/home/praveen/PDF_app/venv/bin/gunicorn \
+    --workers 4 \
+    --worker-class sync \
+    --bind 0.0.0.0:5000 \
+    --timeout 120 \
+    --access-logfile /var/log/file-converter/access.log \
+    --error-logfile /var/log/file-converter/error.log \
+    wsgi:app
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

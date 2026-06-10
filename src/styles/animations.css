@@ -1,0 +1,237 @@
+/* Button Animations */
+@keyframes buttonHover {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    100% {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+    }
+}
+
+@keyframes buttonClick {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    to {
+        opacity: 1;
+        max-height: 500px;
+        overflow: visible;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Progress Animation */
+@keyframes progressFill {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 70%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* Text Animations */
+@keyframes textGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Input Focus Animation */
+@keyframes inputFocus {
+    from {
+        border-color: rgba(102, 126, 234, 0.3);
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.3);
+    }
+
+    to {
+        border-color: rgba(102, 126, 234, 1);
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    }
+}
+
+/* Card Animations */
+@keyframes cardHover {
+    from {
+        transform: translateY(0);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    to {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Loader Animation */
+@keyframes loaderSpin {
+    0% {
+        transform: rotate(0deg);
+        border-color: rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        border-color: rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+    }
+}
+
+/* Success/Error Animations */
+@keyframes successPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* Apply animations */
+.btn-convert:hover {
+    animation: buttonHover 0.3s ease forwards;
+}
+
+.btn-convert:active {
+    animation: buttonClick 0.3s ease;
+}
+
+.converter-card {
+    animation: fadeInScale 0.6s ease;
+}
+
+.header {
+    animation: slideIn 0.5s ease;
+}
+
+.format-section {
+    animation: slideIn 0.7s ease;
+}
+
+.upload-area:hover {
+    animation: pulse 1.5s ease infinite;
+}
+
+.progress-fill {
+    animation: progressFill 3s ease-in-out forwards;
+}
+
+.btn-loader {
+    animation: loaderSpin 1s linear infinite;
+}
+
+.status-message.success {
+    animation: successPulse 0.5s ease;
+}
+
+.status-message.error {
+    animation: shake 0.5s ease;
+}
