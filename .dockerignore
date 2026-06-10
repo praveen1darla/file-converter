@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+.sixth/
+.gemini/
+test_files/
+report.docx
+report.pdf
+*.md
+!README.md

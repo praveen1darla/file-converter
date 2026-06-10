@@ -1,0 +1,27 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+.sixth/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+test_files/
+
+# Generated files
+report.docx
+report.pdf
+
+# Gemini
+.gemini/

@@ -17,7 +17,11 @@ app = Flask(__name__,
             static_folder='src')
 
 # Configuration
-DOWNLOADS_FOLDER = os.path.expanduser('~/Downloads/FileConverter')
+# Use /tmp in Docker/cloud, ~/Downloads locally
+if os.environ.get('DOCKER_ENV') or not os.path.exists(os.path.expanduser('~/Downloads')):
+    DOWNLOADS_FOLDER = '/tmp/FileConverter'
+else:
+    DOWNLOADS_FOLDER = os.path.expanduser('~/Downloads/FileConverter')
 UPLOAD_FOLDER = tempfile.gettempdir()
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'txt', 'png', 'jpg', 'jpeg', 'xlsx', 'csv', 'pptx', 'webp', 'html', 'json'}
 MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB
