@@ -1,3 +1,12 @@
+---
+title: File Converter
+emoji: 📄
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
+
 # ✨ Universal File Converter
 
 A beautiful, modern web application that converts files between **34 different format combinations** — all running locally in your browser. Built with Flask (Python) backend and a glassmorphism-styled frontend.
